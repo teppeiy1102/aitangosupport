@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ニタモノ検索アプリ 操作マニュアル</title>
+    <style>
+        :root {
+            --background-color: #111;
+            --card-background-color: #1d1d1f;
+            --text-color: #f5f5f7;
+            --secondary-text-color: #a1a1a6;
+            --border-color: #3a3a3c;
+            --accent-color: #64c1ff;
+            --highlight-bg: #2c2c2e;
+            --button-primary-bg: #c173c4; /* App's primary color */
+            --button-primary-text: #fff;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap');
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Noto Sans JP", "Segoe UI", Roboto, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin: 0;
+            background: linear-gradient(90deg, #c173c4, #ffa500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            font-size: 20px;
+            color: var(--secondary-text-color);
+            margin-top: 16px;
+        }
+
+        h2 {
+            font-size: 36px;
+            font-weight: 600;
+            margin-top: 60px;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        p, li {
+            font-size: 16px;
+            color: var(--secondary-text-color);
+        }
+        
+        strong {
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        .step-section {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+
+        .step-card {
+            background-color: var(--card-background-color);
+            border-radius: 24px;
+            overflow: hidden;
+            padding: 32px;
+            border: 1px solid var(--border-color);
+        }
+
+        .step-card img {
+            max-width: 300px;
+            width: 100%;
+            display: block;
+            margin: 20px auto 0;
+            border-radius: 18px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .step-card .step-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .step-number {
+            font-size: 12px;
+            font-weight: 700;
+            background-color: var(--highlight-bg);
+            color: var(--secondary-text-color);
+            padding: 6px 12px;
+            border-radius: 20px;
+        }
+        
+        .step-card h3 {
+            margin: 0;
+        }
+
+        code, .highlight {
+            background-color: var(--highlight-bg);
+            padding: 3px 8px;
+            border-radius: 8px;
+            font-family: "SF Mono", "Menlo", "Monaco", monospace;
+            color: #e5e5e5;
+            font-size: 0.9em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 24px;
+            background-color: var(--card-background-color);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        th, td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+
+        th {
+            background-color: var(--highlight-bg);
+            color: var(--text-color);
+            font-weight: 600;
+        }
+        
+        td:first-child {
+            font-weight: 600;
+            color: var(--text-color);
+            text-align: center;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .faq-section {
+            margin-top: 60px;
+        }
+
+        .faq-item {
+            background-color: var(--card-background-color);
+            padding: 24px;
+            border-radius: 18px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .faq-item .question {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-color);
+            margin: 0 0 12px 0;
+        }
+
+        .faq-item .answer {
+            margin: 0;
+            color: var(--secondary-text-color);
+        }
+        
+        .faq-item ul {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>ニタモノ検索アプリ</h1>
+            <p>あなたの「気になる」を、AIが特定してニタモノまで見つけます。</p>
+        </header>
+
+        <main>
+            <section id="introduction">
+                <h2>はじめに</h2>
+                <p>「ニタモノ検索」アプリは、写真に写る商品の名前がわからなくても、AIが特定し、さらに様々なメーカーから類似商品を探し出すことができる、新しい検索ツールです。街で見かけた家具や、SNSで見た素敵な服など、あなたの「知りたい」を瞬時に解決します。</p>
+            </section>
+
+            <section id="how-to-use">
+                <h2>基本的な使い方</h2>
+                <div class="step-section">
+                    <!-- STEP 1 -->
+                    <div class="step-card">
+                        <div class="step-title">
+                            <span class="step-number">STEP 1</span>
+                            <h3>写真を準備する</h3>
+                        </div>
+                        <p>アプリ中央の<code class="highlight">画像を選択</code>ボタンから、特定したい商品が写っている写真を「ギャラリー」または「カメラ」で用意します。</p>
+                        <img src="https://i.imgur.com/8Qj8kFq.png" alt="STEP 1: 写真を準備する">
+                    </div>
+                    <!-- STEP 2 -->
+                    <div class="step-card">
+                        <div class="step-title">
+                            <span class="step-number">STEP 2</span>
+                            <h3>検索ジャンルを選ぶ</h3>
+                        </div>
+                        <p>写真の下にある「検索ジャンル」から、探したい商品のカテゴリを選択します。ジャンルを選ぶと、関連するメーカーが自動で選択されます。</p>
+                        <img src="https://i.imgur.com/x5T2ZtB.png" alt="STEP 2: 検索ジャンルを選ぶ">
+                    </div>
+                    <!-- STEP 3 -->
+                    <div class="step-card">
+                        <div class="step-title">
+                            <span class="step-number">STEP 3</span>
+                            <h3>特定したい商品を囲む</h3>
+                        </div>
+                        <p>写真に表示されている特定したい商品を、指でドラッグして赤い四角で囲みます。対象物がしっかり収まるように囲むのがコツです。</p>
+                        <img src="https://i.imgur.com/uF63T3T.png" alt="STEP 3: 特定したい商品を囲む">
+                    </div>
+                    <!-- STEP 4 -->
+                    <div class="step-card">
+                        <div class="step-title">
+                            <span class="step-number">STEP 4</span>
+                            <h3>AIで商品を特定する</h3>
+                        </div>
+                        <p>商品を囲むとアクティブになる<code class="highlight">AIで商品を特定</code>ボタンをタップ。確認画面で「OK」を押すと解析が始まります。</p>
+                        <img src="https://i.imgur.com/Rss7R6N.png" alt="STEP 4: AIで商品を特定する">
+                    </div>
+                    <!-- STEP 5 -->
+                    <div class="step-card">
+                        <div class="step-title">
+                            <span class="step-number">STEP 5</span>
+                            <h3>特定結果を確認する</h3>
+                        </div>
+                        <p>解析が完了すると、AIが判断した商品の情報がカード形式で表示されます。リンクからGoogle検索で詳細を調べることも可能です。</p>
+                        <img src="https://i.imgur.com/0iH1P9a.png" alt="STEP 5: 特定結果を確認する">
+                    </div>
+                    <!-- STEP 6 -->
+                    <div class="step-card">
+                        <div class="step-title">
+                            <span class="step-number">STEP 6</span>
+                            <h3>ニタモノ商品を探す</h3>
+                        </div>
+                        <p>結果画面の下にある<code class="highlight">ニタモノ商品を検索</code>ボタンをタップ。指定したメーカーから、元の商品に似たアイテムを探し出します。</p>
+                        <img src="https://i.imgur.com/h5T27Wk.png" alt="STEP 6: ニタモノ商品を探す">
+                    </div>
+                </div>
+            </section>
+            
+            <section id="screen-details">
+                <h2>ニタモノ商品検索画面</h2>
+                <p>「ニタモノ商品を検索」ボタンを押すと、この専用画面が表示されます。左右のスワイプやボタン操作で、効率的に類似商品を探せます。</p>
+                <img src="https://i.imgur.com/u67Yx0Y.png" alt="ニタモノ商品検索画面" style="max-width: 400px; width: 100%; display: block; margin: 24px auto; border-radius: 18px; border: 1px solid var(--border-color);">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>番号</th>
+                            <th>機能</th>
+                            <th>説明</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>①</td>
+                            <td><strong>閉じるボタン</strong></td>
+                            <td>この画面を閉じて、特定結果画面に戻ります。</td>
+                        </tr>
+                        <tr>
+                            <td>②</td>
+                            <td><strong>類似商品カード</strong></td>
+                            <td>AIが見つけたニタモノ商品の候補です。<strong>左右にスワイプ</strong>して他の候補に切り替えられます。</td>
+                        </tr>
+                        <tr>
+                            <td>③</td>
+                            <td><strong>WebView（画像検索）</strong></td>
+                            <td>選択中の商品に関連する画像がGoogle画像検索結果として表示され、見た目を確認できます。</td>
+                        </tr>
+                        <tr>
+                            <td>④</td>
+                            <td><strong>WebView拡大/縮小ボタン</strong></td>
+                            <td>WebViewの表示を全画面に拡大したり、元のサイズに戻したりできます。</td>
+                        </tr>
+                        <tr>
+                            <td>⑤</td>
+                            <td><strong>類似商品リスト表示ボタン</strong></td>
+                            <td>タップすると候補商品の一覧が表示され、気になる商品を直接選んで表示を切り替えられます。</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="faq" class="faq-section">
+                <h2>こんなときは？ (FAQ)</h2>
+                <div class="faq-item">
+                    <p class="question">Q. うまく商品が特定できません。</p>
+                    <p class="answer">A. 以下の点をお試しください。
+                        <ul>
+                            <li><strong>明るく、はっきりした写真を使う:</strong> ピンボケや暗い写真はAIが認識しにくくなります。</li>
+                            <li><strong>商品を正確に囲む:</strong> 他の物が入り込まないよう、対象の商品だけを囲んでください。</li>
+                            <li><strong>適切なジャンルを選ぶ:</strong> 検索したい商品に合ったジャンルを選択するとAIの精度が向上します。</li>
+                        </ul>
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <p class="question">Q. 探したいブランドがリストにありません。</p>
+                    <p class="answer">A. 現在、アプリに登録されている主要なブランドのみが検索対象となっています。今後のアップデートで追加される可能性があります。</p>
+                </div>
+                <div class="faq-item">
+                    <p class="question">Q. エラーが表示されました。</p>
+                    <p class="answer">A. 通信環境が不安定な場合や、サーバーが混み合っている場合にエラーが発生することがあります。少し時間をおいてから、もう一度お試しください。問題が解決しない場合は、アプリの再起動をお試しください。</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+</body>
+</html>
