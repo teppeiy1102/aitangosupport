@@ -46,6 +46,7 @@
         max-width: 1280px;
         margin: 0 auto;
         padding: 0 24px;
+        position: relative;
     }
 
     /* Header Styles */
@@ -58,23 +59,26 @@
         overflow: hidden;
     }
 
-    /* New Header Animation */
+    /* Complex Header Animation */
     header::before {
         content: '';
         position: absolute;
-        top: 0;
-        left: -50%;
-        width: 200%;
-        height: 100%;
-        background: linear-gradient(
-            110deg,
-            rgba(255, 255, 255, 0) 40%,
-            rgba(255, 255, 255, 0.08) 50%,
-            rgba(255, 255, 255, 0) 60%
-        );
-        transform: translateX(-25%);
-        animation: subtle-shine 12s ease-in-out infinite;
+        top: -20%;
+        left: -30%;
+        width: 160%;
+        height: 140%;
+        background: 
+            conic-gradient(from 45deg at 30% 40%, 
+                rgba(0, 255, 255, 0) 0deg,
+                rgba(0, 255, 255, 0.2) 90deg,
+                rgba(255, 0, 255, 0.25) 180deg,
+                rgba(255, 255, 0, 0.15) 270deg,
+                rgba(0, 255, 255, 0) 360deg
+            );
+        transform: rotate(0deg) scale(1);
+        animation: complex-rotation 20s linear infinite;
         z-index: 0;
+        mix-blend-mode: overlay;
     }
     
     header::after {
@@ -85,21 +89,236 @@
         width: 100%;
         height: 100%;
         background:
-            radial-gradient(ellipse at 20% 80%, rgba(192, 160, 98, 0.1), transparent 50%),
-            radial-gradient(ellipse at 80% 30%, rgba(192, 160, 98, 0.1), transparent 50%);
-        animation: gentle-glow 15s ease-in-out infinite;
+            radial-gradient(ellipse 600px 400px at 15% 25%, 
+                rgba(0, 255, 255, 0.12) 0%, 
+                rgba(255, 0, 255, 0.18) 30%, 
+                transparent 70%
+            ),
+            radial-gradient(ellipse 500px 300px at 85% 75%, 
+                rgba(255, 255, 0, 0.15) 0%, 
+                rgba(0, 255, 255, 0.08) 40%, 
+                transparent 80%
+            ),
+            radial-gradient(ellipse 800px 200px at 50% 10%, 
+                rgba(255, 0, 255, 0.06) 0%, 
+                transparent 60%
+            ),
+            linear-gradient(135deg, 
+                rgba(0, 0, 0, 0.1) 0%, 
+                rgba(0, 255, 255, 0.05) 20%,
+                transparent 30%, 
+                rgba(255, 255, 0, 0.08) 60%,
+                rgba(255, 0, 255, 0.1) 80%,
+                rgba(0, 0, 0, 0.15) 100%
+            );
+        animation: dynamic-glow 18s ease-in-out infinite;
         z-index: 0;
     }
 
-    @keyframes subtle-shine {
-        0% { transform: translateX(-25%); }
-        50% { transform: translateX(25%); }
-        100% { transform: translateX(-25%); }
+    /* 複数の動的円形オブジェクト */
+    header .container::before {
+        content: '';
+        position: absolute;
+        top: 20%;
+        right: 10%;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, 
+            rgba(0, 255, 255, 0.15) 0%, 
+            rgba(255, 0, 255, 0.2) 40%, 
+            rgba(255, 255, 0, 0.1) 70%,
+            transparent 80%
+        );
+        border-radius: 50%;
+        transform: translate(50%, -50%) scale(0.8);
+        animation: floating-orb 14s ease-in-out infinite;
+        z-index: 0;
+        pointer-events: none;
     }
 
-    @keyframes gentle-glow {
-        0%, 100% { opacity: 0.7; transform: scale(1); }
-        50% { opacity: 1; transform: scale(1.05); }
+    header .container::after {
+        content: '';
+        position: absolute;
+        bottom: 15%;
+        left: 5%;
+        width: 200px;
+        height: 200px;
+        background: conic-gradient(from 180deg,
+            rgba(0, 255, 255, 0.08) 0deg,
+            rgba(255, 255, 0, 0.12) 120deg,
+            rgba(255, 0, 255, 0.1) 240deg,
+            rgba(0, 255, 255, 0.06) 360deg
+        );
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+        transform: rotate(0deg);
+        animation: morphing-shape 16s ease-in-out infinite;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    /* 第一レイヤー: 大きな円形オブジェクト */
+    header:before {
+        box-shadow: 
+            inset -150px 120px 200px rgba(0, 255, 255, 0.08),
+            inset 180px -100px 180px rgba(255, 0, 255, 0.1),
+            inset -200px -150px 220px rgba(255, 255, 0, 0.06);
+    }
+
+    /* 疑似要素で追加の円形要素を作成 */
+    header {
+        background-image:
+            /* 小さな円形オブジェクト群 */
+            radial-gradient(circle 80px at 25% 30%, rgba(0, 255, 255, 0.12) 0%, transparent 60%),
+            radial-gradient(circle 60px at 75% 20%, rgba(255, 0, 255, 0.15) 0%, transparent 70%),
+            radial-gradient(circle 90px at 85% 60%, rgba(255, 255, 0, 0.1) 0%, transparent 65%),
+            radial-gradient(circle 70px at 15% 70%, rgba(0, 255, 255, 0.08) 0%, transparent 75%),
+            radial-gradient(circle 100px at 60% 10%, rgba(255, 0, 255, 0.09) 0%, transparent 55%),
+            radial-gradient(circle 75px at 40% 85%, rgba(255, 255, 0, 0.11) 0%, transparent 68%),
+            
+            /* 中サイズの円形オブジェクト群 */
+            radial-gradient(circle 120px at 10% 15%, rgba(0, 255, 255, 0.07) 0%, transparent 80%),
+            radial-gradient(circle 110px at 90% 40%, rgba(255, 0, 255, 0.09) 0%, transparent 75%),
+            radial-gradient(circle 130px at 30% 90%, rgba(255, 255, 0, 0.06) 0%, transparent 70%),
+            radial-gradient(circle 95px at 70% 75%, rgba(0, 255, 255, 0.1) 0%, transparent 65%),
+            
+            /* 動的な楕円形オブジェクト群 */
+            radial-gradient(ellipse 150px 80px at 50% 25%, rgba(255, 0, 255, 0.08) 0%, transparent 60%),
+            radial-gradient(ellipse 100px 180px at 20% 60%, rgba(255, 255, 0, 0.07) 0%, transparent 70%),
+            radial-gradient(ellipse 120px 90px at 80% 80%, rgba(0, 255, 255, 0.09) 0%, transparent 65%),
+            
+            /* 複雑な形状のグラデーション */
+            conic-gradient(from 45deg at 35% 65%, 
+                rgba(0, 255, 255, 0.05) 0deg,
+                rgba(255, 0, 255, 0.08) 120deg,
+                rgba(255, 255, 0, 0.06) 240deg,
+                rgba(0, 255, 255, 0.05) 360deg
+            ),
+            conic-gradient(from 120deg at 65% 35%, 
+                rgba(255, 255, 0, 0.04) 0deg,
+                rgba(0, 255, 255, 0.07) 120deg,
+                rgba(255, 0, 255, 0.05) 240deg,
+                rgba(255, 255, 0, 0.04) 360deg
+            );
+        
+        animation: complex-bg-animation 25s ease-in-out infinite;
+    }
+
+    @keyframes complex-bg-animation {
+        0%, 100% {
+            background-position: 
+                25% 30%, 75% 20%, 85% 60%, 15% 70%, 60% 10%, 40% 85%,
+                10% 15%, 90% 40%, 30% 90%, 70% 75%,
+                50% 25%, 20% 60%, 80% 80%,
+                35% 65%, 65% 35%;
+            filter: brightness(1) hue-rotate(0deg);
+        }
+        25% {
+            background-position: 
+                30% 35%, 70% 25%, 80% 65%, 20% 75%, 65% 15%, 35% 80%,
+                15% 20%, 85% 45%, 35% 85%, 65% 70%,
+                55% 30%, 25% 55%, 75% 75%,
+                40% 60%, 60% 40%;
+            filter: brightness(1.1) hue-rotate(15deg);
+        }
+        50% {
+            background-position: 
+                35% 25%, 65% 30%, 75% 55%, 25% 65%, 70% 20%, 30% 75%,
+                20% 25%, 80% 35%, 40% 80%, 60% 65%,
+                60% 35%, 30% 50%, 70% 70%,
+                45% 55%, 55% 45%;
+            filter: brightness(0.9) hue-rotate(30deg);
+        }
+        75% {
+            background-position: 
+                20% 40%, 80% 15%, 90% 70%, 10% 60%, 55% 25%, 45% 90%,
+                5% 10%, 95% 50%, 25% 95%, 75% 80%,
+                45% 20%, 15% 65%, 85% 85%,
+                30% 70%, 70% 30%;
+            filter: brightness(1.05) hue-rotate(-10deg);
+        }
+    }
+
+    @keyframes complex-rotation {
+        0% { 
+            transform: rotate(0deg) scale(1); 
+            opacity: 0.6;
+        }
+        25% { 
+            transform: rotate(90deg) scale(1.1); 
+            opacity: 0.8;
+        }
+        50% { 
+            transform: rotate(180deg) scale(0.9); 
+            opacity: 1;
+        }
+        75% { 
+            transform: rotate(270deg) scale(1.05); 
+            opacity: 0.7;
+        }
+        100% { 
+            transform: rotate(360deg) scale(1); 
+            opacity: 0.6;
+        }
+    }
+
+    @keyframes dynamic-glow {
+        0%, 100% { 
+            opacity: 0.8; 
+            transform: scale(1) rotate(0deg);
+            filter: brightness(1) contrast(1.1);
+        }
+        33% { 
+            opacity: 1; 
+            transform: scale(1.03) rotate(1deg);
+            filter: brightness(1.2) contrast(1.3);
+        }
+        66% { 
+            opacity: 0.9; 
+            transform: scale(0.98) rotate(-0.5deg);
+            filter: brightness(0.9) contrast(1.4);
+        }
+    }
+
+    @keyframes floating-orb {
+        0%, 100% {
+            transform: translate(50%, -50%) scale(0.8) rotate(0deg);
+            opacity: 0.4;
+        }
+        25% {
+            transform: translate(30%, -30%) scale(1) rotate(90deg);
+            opacity: 0.7;
+        }
+        50% {
+            transform: translate(70%, -70%) scale(0.9) rotate(180deg);
+            opacity: 0.6;
+        }
+        75% {
+            transform: translate(40%, -40%) scale(1.1) rotate(270deg);
+            opacity: 0.8;
+        }
+    }
+
+    @keyframes morphing-shape {
+        0%, 100% {
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            transform: rotate(0deg) scale(1);
+            opacity: 0.5;
+        }
+        25% {
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            transform: rotate(90deg) scale(1.1);
+            opacity: 0.7;
+        }
+        50% {
+            border-radius: 40% 60% 60% 40% / 40% 60% 40% 60%;
+            transform: rotate(180deg) scale(0.9);
+            opacity: 0.8;
+        }
+        75% {
+            border-radius: 70% 30% 40% 60% / 30% 70% 60% 40%;
+            transform: rotate(270deg) scale(1.05);
+            opacity: 0.6;
+        }
     }
 
 
@@ -197,27 +416,7 @@
         line-height: 1.8;
     }
 
-    /* Apps Horizontal Scroll Container */
-    .apps-container {
-        margin-top: 80px;
-    }
-
-    .apps-scroll-wrapper {
-        overflow-x: auto;
-        padding: 20px 0 30px 0;
-        scrollbar-width: none; /* Firefox */
-    }
-    .apps-scroll-wrapper::-webkit-scrollbar {
-        display: none; /* Chrome, Safari, Opera */
-    }
-
-    .apps-hero-grid {
-        display: flex;
-        gap: 30px;
-        padding: 0 10px;
-        min-width: max-content;
-    }
-
+    /* Apps Grid Layout */
     .app-hero-card {
         background: var(--surface-primary);
         padding: 32px;
@@ -225,8 +424,6 @@
         transition: box-shadow 0.4s ease, transform 0.4s ease;
         border: 1px solid var(--border-primary);
         box-shadow: var(--shadow-subtle);
-        min-width: 340px;
-        flex-shrink: 0;
         cursor: pointer;
         position: relative;
     }
@@ -260,132 +457,7 @@
         color: var(--text-secondary);
         margin-bottom: 24px;
         font-size: 0.95rem;
-    }
-
-    .download-buttons {
-        display: flex;
-        gap: 12px;
-        justify-content: flex-start;
-    }
-
-    .download-btn {
-        padding: 10px 20px;
-        text-decoration: none;
-        font-size: 0.9rem;
-        font-weight: 500;
-        border: 1px solid var(--accent-dark);
-        transition: all 0.3s ease;
-        color: var(--accent-dark);
-        background: transparent;
-        text-align: center;
-        font-family: "Inter", sans-serif;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-    }
-
-    .download-btn:hover {
-        background: var(--accent-dark);
-        color: var(--text-on-dark);
-    }
-
-    /* App Details Modal */
-    .app-details-modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.7);
-        backdrop-filter: blur(10px);
-        z-index: 2000;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-    }
-
-    .app-details-content {
-        background: var(--surface-primary);
-        padding: 50px;
-        max-width: 750px;
-        width: 100%;
-        max-height: 90vh;
-        overflow-y: auto;
-        box-shadow: var(--shadow-large);
-        position: relative;
-        border: 1px solid var(--border-primary);
-    }
-
-    .app-details-close {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        background: none;
-        border: none;
-        font-size: 24px;
-        color: var(--text-secondary);
-        cursor: pointer;
-        transition: color 0.3s ease;
-    }
-
-    .app-details-close:hover {
-        color: var(--text-primary);
-    }
-
-    .app-details-header {
-        display: flex;
-        align-items: center;
-        gap: 24px;
-        margin-bottom: 32px;
-    }
-
-    .app-details-icon {
-        width: 80px;
-        height: 80px;
-        box-shadow: none;
-        border-radius: 0;
-    }
-
-    .app-details-title {
-        font-family: "Playfair Display", serif;
-        font-size: 2.5rem;
-        font-weight: 600;
-        color: var(--text-primary);
-        margin: 0;
-    }
-
-    .app-details-subtitle {
-        color: var(--text-secondary);
-        font-style: normal;
-        margin-top: 8px;
-        font-size: 1.1rem;
-    }
-
-    .feature-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 24px;
-        margin: 32px 0;
-    }
-
-    .feature-item-detail {
-        background: var(--background-secondary);
-        padding: 24px;
-        border: 1px solid var(--border-primary);
-        transition: all 0.3s ease;
-    }
-
-    .feature-item-detail:hover {
-        transform: translateY(-4px);
-        box-shadow: var(--shadow-medium);
-    }
-
-    .feature-item-detail h4 {
-        margin: 0 0 12px 0;
-        color: var(--text-primary);
-        font-family: "Inter", sans-serif;
-        font-weight: 500;
-        font-size: 1.1rem;
+        line-height: 1.6;
     }
 
     /* Form Styles */
@@ -557,6 +629,21 @@
     }
 
     /* Modal Styles */
+    .modal, .app-details-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
     .modal-content {
         background: var(--surface-primary);
         padding: 40px;
@@ -566,6 +653,9 @@
         border: 1px solid var(--border-primary);
         text-align: center;
         border-radius: 0;
+        position: relative;
+        max-height: 90vh;
+        overflow-y: auto;
     }
 
     .modal-content h2 {
@@ -574,6 +664,152 @@
 
     .modal-content .button {
         margin-top: 30px;
+    }
+
+    /* App Details Modal Styles */
+    .app-details-content {
+        background: var(--surface-primary);
+        padding: 40px;
+        max-width: 700px;
+        width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: var(--shadow-large);
+        border: 1px solid var(--border-primary);
+        border-radius: 0;
+        position: relative;
+    }
+
+    .app-details-close {
+        position: absolute;
+        top: 16px;
+        right: 20px;
+        background: none;
+        border: none;
+        font-size: 28px;
+        cursor: pointer;
+        color: var(--text-secondary);
+        line-height: 1;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: color 0.3s ease;
+    }
+
+    .app-details-close:hover {
+        color: var(--text-primary);
+    }
+
+    .app-details-header {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 24px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--border-primary);
+    }
+
+    .app-details-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 0;
+        flex-shrink: 0;
+    }
+
+    .app-details-title {
+        font-family: "Playfair Display", "Noto Serif JP", serif;
+        font-size: 2rem;
+        font-weight: 600;
+        margin: 0 0 8px 0;
+        color: var(--text-primary);
+    }
+
+    .app-details-subtitle {
+        color: var(--text-secondary);
+        font-size: 1.1rem;
+        margin: 0;
+    }
+
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+    }
+
+    .feature-item-detail {
+        background: var(--background-secondary);
+        padding: 20px;
+        border: 1px solid var(--border-primary);
+    }
+
+    .feature-item-detail h4 {
+        font-family: "Inter", sans-serif;
+        font-weight: 600;
+        margin: 0 0 8px 0;
+        color: var(--text-primary);
+        font-size: 1rem;
+    }
+
+    .feature-item-detail p {
+        margin: 0;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    /* Close button styles */
+    .close-button {
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: var(--text-secondary);
+        position: absolute;
+        top: 16px;
+        right: 20px;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: color 0.3s ease;
+    }
+
+    .close-button:hover {
+        color: var(--text-primary);
+    }
+
+    .download-buttons {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .download-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background: var(--accent-dark);
+        color: var(--text-on-dark);
+        text-decoration: none;
+        border: 1px solid var(--accent-dark);
+        cursor: pointer;
+        font-size: 0.85rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        font-family: "Inter", sans-serif;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        text-align: center;
+        flex: 1;
+        min-width: 120px;
+    }
+
+    .download-btn:hover {
+        background: var(--surface-primary);
+        color: var(--accent-dark);
     }
 
     /* Responsive Design */
@@ -863,11 +1099,10 @@
 <body>
     <header>
         <div class="container">
-            <h1>Build with TY</h1>
-            <p class="lead">革新的なアプリケーション開発者。AI技術を活用して日常をより豊かにする5つのアプリケーション。</p>
+            <h1>Build with teppeiy</h1>
+            <p class="lead">AI技術を活用して日常をより豊かにする5つのアプリケーション。</p>
             <nav class="nav-menu">
                 <a href="#apps" class="nav-link">Apps</a>
-                <a href="#features" class="nav-link">Features</a>
                 <a href="#contact" class="nav-link">Contact</a>
                 <a href="#faq" class="nav-link">FAQ</a>
                 <a href="#version" class="nav-link">Version</a>
@@ -878,145 +1113,61 @@
     <main>
         <section id="apps" class="section">
             <div class="container">
-                <div class="apps-container">
-                    <div class="apps-scroll-wrapper">
-                        <div class="apps-hero-grid">
-                            <!-- MachoSounds -->
-                            <div class="app-hero-card" data-app="machosounds">
-                                <img src="apsimage/machosounds.png" alt="MachoSounds App Icon" class="app-icon">
-                                <h3 class="app-hero-title">MachoSounds</h3>
-                                <p class="app-hero-description">ボディビル掛け声とタバタタイマーでトレーニングを熱くサポート</p>
-                                <div class="download-buttons">
-                                    <a href="https://apps.apple.com/us/app/machosounds/id6746427700" class="download-btn" target="_blank">App Store</a>
-                                    <a href="https://play.google.com/store/apps/details?id=com.apps.fluttermucho" class="download-btn" target="_blank">Google Play</a>
-                                </div>
-                            </div>
-
-                            <!-- aitango -->
-                            <div class="app-hero-card" data-app="aitango">
-                                <img src="apsimage/aitango.png" alt="AITango App Icon" class="app-icon">
-                                <h3 class="app-hero-title">aitango</h3>
-                                <p class="app-hero-description">AI学習フラッシュカードで効率的な語学習得を実現</p>
-                                <div class="download-buttons">
-                                    <a href="https://apps.apple.com/app/aitango/id6742535846" class="download-btn" target="_blank">App Store</a>
-                                    <a href="https://play.google.com/store/apps/details?id=com.flutter_aiflash" class="download-btn" target="_blank">Google Play</a>
-                                </div>
-                            </div>
-
-                            <!-- AutoPoet -->
-                            <div class="app-hero-card" data-app="autopoet">
-                                <img src="apsimage/autopoet.png" alt="AutoPoet App Icon" class="app-icon">
-                                <h3 class="app-hero-title">AutoPoet</h3>
-                                <p class="app-hero-description">日記をAIが美しい詩に変換する革新的なアプリ</p>
-                                <div class="download-buttons">
-                                    <a href="https://apps.apple.com/app/autopoet/id6748313109" class="download-btn" target="_blank">App Store</a>
-                                    <a href="https://play.google.com/store/apps/details?id=com.autopoet.app" class="download-btn" target="_blank">Google Play</a>
-                                </div>
-                            </div>
-
-                            <!-- はじめのAI -->
-                            <div class="app-hero-card" data-app="hajime">
-                                <img src="apsimage/hajime.png" alt="はじめのAI App Icon" class="app-icon">
-                                <h3 class="app-hero-title">はじめのAI</h3>
-                                <p class="app-hero-description">AI初心者向けの優しい入門アプリ</p>
-                                <div class="download-buttons">
-                                    <a href="https://apps.apple.com/jp/app/%E3%81%AF%E3%81%98%E3%82%81%E3%81%AEai/id6740161219" class="download-btn" target="_blank">App Store</a>
-                                    <a href="https://play.google.com/store/apps/details?id=com.yama.aifilter&hl=ja" class="download-btn" target="_blank">Google Play</a>
-                                </div>
-                            </div>
-
-                            <!-- ニタモノ -->
-                            <div class="app-hero-card" data-app="nitamono">
-                                <img src="apsimage/nitamono.png" alt="ニタモノ App Icon" class="app-icon">
-                                <h3 class="app-hero-title">ニタモノ</h3>
-                                <p class="app-hero-description">AIが似た商品を発見する賢いショッピングアプリ</p>
-                                <div class="download-buttons">
-                                    <a href="https://apps.apple.com/us/app/%E3%83%8B%E3%82%BF%E3%83%A2%E3%83%8E/id6747037551" class="download-btn" target="_blank">App Store</a>
-                                    <a href="https://play.google.com/store/apps/details?id=com.yama.sizecheck" class="download-btn" target="_blank">Google Play</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="features" class="section" style="background-color: var(--background-secondary);">
-            <div class="container">
-                <h2>Features</h2>
+                <h2>Apps</h2>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 40px;">
                     
-                    <!-- MachoSounds詳細 -->
-                    <div class="app-feature-card">
-                        <div class="app-header">
-                            <img src="apsimage/machosounds.png" alt="MachoSounds Icon" style="width: 60px; height: 60px; margin-bottom: 16px;">
-                            <h3>MachoSounds</h3>
-                        </div>
-                        <p>自宅トレーニングのモチベーション向上をサポート。「ナイスバルク！」「デカいよ！」「キレてる！」などの熱い応援コールとタバタタイマー機能を搭載し、アドレナリンを急速に流してトレーニング効率を最大化します。</p>
-                        <div class="feature-list">
-                            <div class="feature-item">ボディビル掛け声</div>
-                            <div class="feature-item">モチベーション画像</div>
-                            <div class="feature-item">タバタタイマー</div>
+                    <!-- MachoSounds -->
+                    <div class="app-hero-card" data-app="machosounds">
+                        <img src="apsimage/machosounds.png" alt="MachoSounds App Icon" class="app-icon">
+                        <h3 class="app-hero-title">MachoSounds</h3>
+                        <p class="app-hero-description">自宅トレーニングのモチベーション向上をサポート。「ナイスバルク！」「デカいよ！」「キレてる！」などの熱い応援コールとタバタタイマー機能を搭載し、アドレナリンを急速に流してトレーニング効率を最大化します。</p>
+                        <div class="download-buttons">
+                            <a href="https://apps.apple.com/us/app/machosounds/id6746427700" class="download-btn" target="_blank">App Store</a>
+                            <a href="https://play.google.com/store/apps/details?id=com.apps.fluttermucho" class="download-btn" target="_blank">Google Play</a>
                         </div>
                     </div>
 
-                    <!-- aitango詳細 -->
-                    <div class="app-feature-card">
-                        <div class="app-header">
-                            <img src="apsimage/aitango.png" alt="aitango Icon" style="width: 60px; height: 60px; margin-bottom: 16px;">
-                            <h3>aitango</h3>
-                        </div>
-                        <p>AIを活用した革新的なフラッシュカード学習アプリ。長文や画像から自動でカード作成し、エビングハウスの忘却曲線に基づいた科学的復習システムで学習効率を劇的に向上させます。</p>
-                        <div class="feature-list">
-                            <div class="feature-item">AI自動カード作成</div>
-                            <div class="feature-item">音声ナレーション</div>
-                            <div class="feature-item">科学的復習システム</div>
-                            <div class="feature-item">タイピングゲーム</div>
+                    <!-- aitango -->
+                    <div class="app-hero-card" data-app="aitango">
+                        <img src="apsimage/aitango.png" alt="aitango App Icon" class="app-icon">
+                        <h3 class="app-hero-title">aitango</h3>
+                        <p class="app-hero-description">AIを活用した革新的なフラッシュカード学習アプリ。長文や画像から自動でカード作成し、エビングハウスの忘却曲線に基づいた科学的復習システムで学習効率を劇的に向上させます。</p>
+                        <div class="download-buttons">
+                            <a href="https://apps.apple.com/app/aitango/id6742535846" class="download-btn" target="_blank">App Store</a>
+                            <a href="https://play.google.com/store/apps/details?id=com.flutter_aiflash" class="download-btn" target="_blank">Google Play</a>
                         </div>
                     </div>
 
-                    <!-- AutoPoet詳細 -->
-                    <div class="app-feature-card">
-                        <div class="app-header">
-                            <img src="apsimage/autopoet.png" alt="AutoPoet Icon" style="width: 60px; height: 60px; margin-bottom: 16px;">
-                            <h3>AutoPoet</h3>
-                        </div>
-                        <p>日々の思い出をAI（Google Gemini）が美しい詩や感動的な物語に変換する革新的な日記アプリ。10種類の絵文字で気分を表現し、思い出を芸術的に保存できます。</p>
-                        <div class="feature-list">
-                            <div class="feature-item">AI詩・ストーリー生成</div>
-                            <div class="feature-item">パスワード認証</div>
-                            <div class="feature-item">統計・分析機能</div>
-                            <div class="feature-item">カレンダービュー</div>
+                    <!-- AutoPoet -->
+                    <div class="app-hero-card" data-app="autopoet">
+                        <img src="apsimage/autopoet.png" alt="AutoPoet App Icon" class="app-icon">
+                        <h3 class="app-hero-title">AutoPoet</h3>
+                        <p class="app-hero-description">日々の思い出をAI（Google Gemini）が美しい詩や感動的な物語に変換する革新的な日記アプリ。10種類の絵文字で気分を表現し、思い出を芸術的に保存できます。</p>
+                        <div class="download-buttons">
+                            <a href="https://apps.apple.com/app/autopoet/id6748313109" class="download-btn" target="_blank">App Store</a>
+                            <a href="https://play.google.com/store/apps/details?id=com.autopoet.app" class="download-btn" target="_blank">Google Play</a>
                         </div>
                     </div>
 
-                    <!-- はじめのAI詳細 -->
-                    <div class="app-feature-card">
-                        <div class="app-header">
-                            <img src="apsimage/hajime.png" alt="はじめのAI Icon" style="width: 60px; height: 60px; margin-bottom: 16px;">
-                            <h3>はじめのAI</h3>
-                        </div>
-                        <p>AI初心者でも簡単にAIの便利さを体験できるアプリ。「おまかせプロンプト」で複雑な指示は不要。広告なし・買い切り型でストレスフリーなAI体験を提供し、新しい時代への入門をサポートします。</p>
-                        <div class="feature-list">
-                            <div class="feature-item">おまかせプロンプト</div>
-                            <div class="feature-item">広告なし</div>
-                            <div class="feature-item">買い切り型</div>
-                            <div class="feature-item">学習・作業効率化</div>
+                    <!-- はじめのAI -->
+                    <div class="app-hero-card" data-app="hajime">
+                        <img src="apsimage/hajime.png" alt="はじめのAI App Icon" class="app-icon">
+                        <h3 class="app-hero-title">はじめのAI</h3>
+                        <p class="app-hero-description">AI初心者でも簡単にAIの便利さを体験できるアプリ。「おまかせプロンプト」で複雑な指示は不要。広告なし・買い切り型でストレスフリーなAI体験を提供し、新しい時代への入門をサポートします。</p>
+                        <div class="download-buttons">
+                            <a href="https://apps.apple.com/jp/app/%E3%81%AF%E3%81%98%E3%82%81%E3%81%AEai/id6740161219" class="download-btn" target="_blank">App Store</a>
+                            <a href="https://play.google.com/store/apps/details?id=com.yama.aifilter&hl=ja" class="download-btn" target="_blank">Google Play</a>
                         </div>
                     </div>
 
-                    <!-- ニタモノ詳細 -->
-                    <div class="app-feature-card">
-                        <div class="app-header">
-                            <img src="apsimage/nitamono.png" alt="ニタモノ Icon" style="width: 60px; height: 60px; margin-bottom: 16px;">
-                            <h3>ニタモノ</h3>
-                        </div>
-                        <p>欲しい商品の「似たもの」をAIが発見する新しいショッピングサポートアプリ。写真から商品を特定し、400以上のブランドから類似アイテムを提案。予算に合わせた賢いショッピングを実現します。</p>
-                        <div class="feature-list">
-                            <div class="feature-item">AI画像検索</div>
-                            <div class="feature-item">AIテキスト検索</div>
-                            <div class="feature-item">400+ブランド対応</div>
-                            <div class="feature-item">お気に入り保存</div>
+                    <!-- ニタモノ -->
+                    <div class="app-hero-card" data-app="nitamono">
+                        <img src="apsimage/nitamono.png" alt="ニタモノ App Icon" class="app-icon">
+                        <h3 class="app-hero-title">ニタモノ</h3>
+                        <p class="app-hero-description">欲しい商品の「似たもの」をAIが発見する新しいショッピングサポートアプリ。写真から商品を特定し、400以上のブランドから類似アイテムを提案。予算に合わせた賢いショッピングを実現します。</p>
+                        <div class="download-buttons">
+                            <a href="https://apps.apple.com/us/app/%E3%83%8B%E3%82%BF%E3%83%A2%E3%83%8E/id6747037551" class="download-btn" target="_blank">App Store</a>
+                            <a href="https://play.google.com/store/apps/details?id=com.yama.sizecheck" class="download-btn" target="_blank">Google Play</a>
                         </div>
                     </div>
                 </div>
@@ -1071,18 +1222,102 @@
         <section id="faq" class="section" style="background-color: var(--background-secondary);">
             <div class="container">
                 <h2>FAQ</h2>
+                
+                <!-- MachoSounds FAQ -->
                 <div class="faq-item">
-                    <h3 class="faq-question" aria-expanded="false">MachoSoundsの使い方について</h3>
+                    <h3 class="faq-question" aria-expanded="false">MachoSoundsとはどのようなアプリですか？</h3>
                     <div class="faq-answer">
-                        <p><strong>MachoSounds</strong>は、トレーニング中のモチベーション向上をサポートするアプリです。「ナイスバルク！」「デカいよ！」などの応援コールがランダムに再生されます。自宅でのトレーニング中に使用すると、ジムのような熱気を感じながら効率的に追い込めます。</p>
+                        <p>MachoSoundsは、ボディビルの応援コールとタバタタイマー機能を備えたトレーニングサポートアプリです。トレーニング中のモチベーションを高め、効率を向上させることを目的としています。</p>
                     </div>
                 </div>
                 <div class="faq-item">
-                    <h3 class="faq-question" aria-expanded="false">aitangoでカードが自動作成されない</h3>
+                    <h3 class="faq-question" aria-expanded="false">MachoSoundsの主な機能は何ですか？</h3>
                     <div class="faq-answer">
-                        <p><strong>aitango</strong>のAI自動作成機能でカードが生成されない場合は、入力テキストの量や言語設定、画像の品質をご確認ください。移動中学習機能では音声ナレーションで効率的に学習でき、エビングハウスの忘却曲線に基づいた最適な復習タイミングが通知されます。</p>
+                        <p>ランダムに再生されるアツい応援コールを聴くことができます。再生中はジムの熱気を感じさせるマッチョな画像が表示され、モチベーションが最高潮に高まります。また、追い込みに必須のタバタタイマー機能も搭載されています。</p>
                     </div>
                 </div>
+
+                <!-- aitango FAQ -->
+                <div class="faq-item">
+                    <h3 class="faq-question" aria-expanded="false">aitangoはどんな種類のアプリですか？</h3>
+                    <div class="faq-answer">
+                        <p>aitangoは、AIを搭載したフラッシュカードアプリで、学習効率を劇的に向上させるための多機能を提供します。フラッシュカードの作成から学習、復習、共有、管理まで、学習のあらゆる側面をサポートする「これ一つで完結」する革新的なアプリです。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question" aria-expanded="false">AIはどのようにフラッシュカード作成に役立ちますか？</h3>
+                    <div class="faq-answer">
+                        <p>長文テキスト、単語リスト、カメラ画像からAIが単語を抽出し、関連語や連想語を自動で生成します。CSVファイルのインポートもサポートしており、21言語に対応しています。もちろん、手動編集も可能です。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question" aria-expanded="false">効率的な復習方法は提供されていますか？</h3>
+                    <div class="faq-answer">
+                        <p>はい、エビングハウスの忘却曲線に基づき、最適な復習タイミングをアプリが自動で通知します。これにより、「いつ復習すればいいか」という心配から解放され、科学的根拠に基づいた効果的な記憶定着をサポートします。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question" aria-expanded="false">作成したフラッシュカードは共有したり、他のユーザーのものを利用したりできますか？</h3>
+                    <div class="faq-answer">
+                        <p>はい、フラッシュカードのバックアップ機能があり、「みんなのフラッシュカード」ページから他のユーザーが共有した高品質なフラッシュカードをダウンロードできます。共有されたフラッシュカードにはコメントや「いいね」を追加して推薦することも可能です。</p>
+                    </div>
+                </div>
+
+                <!-- AutoPoet FAQ -->
+                <div class="faq-item">
+                    <h3 class="faq-question" aria-expanded="false">autopoetとはどのようなアプリですか？</h3>
+                    <div class="faq-answer">
+                        <p>autopoetは、日々の思い出を記録し、AIが感動的な詩や物語に変えてくれる革新的なAI日記アプリです。美しいデザインと最新のAI技術（Google Gemini）で、あなたの人生に新しい彩りを与えます。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question" aria-expanded="false">日記にはどのような情報を記録できますか？また、セキュリティ機能はありますか？</h3>
+                    <div class="faq-answer">
+                        <p>タイトル、内容、画像を直感的に記録でき、10種類の絵文字で気分を表現したり、複数の写真を添付したりできます。特別な思い出は「お気に入り」として保存可能です。セキュリティ機能として、4桁のパスワード認証があり、アプリ起動時に認証チェックが行われます。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question" aria-expanded="false">AI創作機能はどのように使いますか？</h3>
+                    <div class="faq-answer">
+                        <p>アプリを起動し、最初の日記を書き、気分を絵文字で選択し、必要に応じて写真を追加した後、「AI創作タブ」で詩や物語を生成できます。選択した日記エントリーから美しい詩を自動生成したり、日記の内容を元に感動的な物語を生成したりすることが可能です。</p>
+                    </div>
+                </div>
+
+                <!-- はじめのAI FAQ -->
+                <div class="faq-item">
+                    <h3 class="faq-question" aria-expanded="false">「はじめのAI」はどのような人におすすめですか？</h3>
+                    <div class="faq-answer">
+                        <p>AIを初めて利用する方や、AIに難しい知識が必要だと思っている方におすすめです。複雑なメニューや設定、プロンプトの考案が一切不要で、誰でも簡単に、そして快適にAIの便利さを体験できるよう設計されています。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question" aria-expanded="false">「おまかせプロンプト」とは何ですか？また、アプリに広告は表示されますか？</h3>
+                    <div class="faq-answer">
+                        <p>「おまかせプロンプト」は、AIに指示を出すための「プロンプト」を自分で考える必要がなく、あらかじめ用意された様々な場面で役立つ選択肢のことです。例えば、「今日の献立は何にしよう？」「SNSに投稿する面白い文章を考えて」といった目的を選ぶだけでAIが対応します。アプリには広告表示が一切なく、ストレスなくAIとの対話に集中できます。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question" aria-expanded="false">「はじめのAI」は月額課金が必要ですか？</h3>
+                    <div class="faq-answer">
+                        <p>いいえ、月額課金は不要で、一度購入すればずっと使えます。</p>
+                    </div>
+                </div>
+
+                <!-- ニタモノ FAQ -->
+                <div class="faq-item">
+                    <h3 class="faq-question" aria-expanded="false">ニタモノはどのような時に役立つアプリですか？</h3>
+                    <div class="faq-answer">
+                        <p>「この家具、素敵だけど高すぎる…」といった「理由があって買えない欲しいもの」や、「SNSで見かけたあのバッグはどこのだろう？」といった「どこのか分からないアイテム」の<strong>「似たもの」をAIが探し出してくれる</strong>新しいショッピングサポートアプリです。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question" aria-expanded="false">ニタモノのAI検索機能はどのように使いますか？</h3>
+                    <div class="faq-answer">
+                        <p>AI画像検索では、写真やスクリーンショットから気になる商品を囲むだけで、AIがその商品を特定し、デザインが似ているアイテムをブランドの垣根を越えて提案します。AIテキスト検索では、「木の棚 30cmぐらい」「5000円以下の白いスニーカー」といったあいまいな言葉で入力しても、AIがイメージに合った商品をリストアップします。家具、アパレル、バッグ、雑貨など30以上のジャンル、400以上のブランド情報に対応しています。</p>
+                    </div>
+                </div>
+
+                <!-- 一般的なトラブルシューティング -->
                 <div class="faq-item">
                     <h3 class="faq-question" aria-expanded="false">アプリが正常に動作しない</h3>
                     <div class="faq-answer">
@@ -1097,23 +1332,23 @@
                 <h2>Version Information</h2>
                 <div class="version-app-info">
                     <h3>MachoSounds</h3>
-                    <p>Version: <strong>1.1.0</strong> | Last Updated: <time datetime="2025-03-10">2025-03-10</time> | OS: iOS 14.0+, Android 7.0+</p>
+                    <p>Version: <strong>1.5.5</strong> | Last Updated: <time datetime="2025-03-10">2025-03-10</time> | OS: iOS 14.0+, Android 7.0+</p>
                 </div>
                 <div class="version-app-info">
                     <h3>aitango</h3>
-                    <p>Version: <strong>1.0.0</strong> | Last Updated: <time datetime="2025-02-28">2025年2月28日</time> | OS: iOS 15.0+, Android 8.0+</p>
+                    <p>Version: <strong>4.1.1</strong> | Last Updated: <time datetime="2025-02-28">2025年2月28日</time> | OS: iOS 15.0+, Android 8.0+</p>
                 </div>
                 <div class="version-app-info">
                     <h3>AutoPoet</h3>
-                    <p>Version: <strong>1.0.0</strong> | Last Updated: <time datetime="2025-07-01">2025年7月1日</time> | OS: iOS 15.0+, Android 8.0+</p>
+                    <p>Version: <strong>1.1.1</strong> | Last Updated: <time datetime="2025-07-01">2025年7月1日</time> | OS: iOS 15.0+, Android 8.0+</p>
                 </div>
                 <div class="version-app-info">
                     <h3>はじめのAI</h3>
-                    <p>Version: <strong>1.5.0</strong> | Last Updated: <time datetime="2025-06-16">2025年6月16日</time> | OS: iOS 15.0+, Android 8.0+</p>
+                    <p>Version: <strong>1.8.0</strong> | Last Updated: <time datetime="2025-06-16">2025年6月16日</time> | OS: iOS 15.0+, Android 8.0+</p>
                 </div>
                 <div class="version-app-info">
                     <h3>ニタモノ</h3>
-                    <p>Version: <strong>1.0.0</strong> | Last Updated: <time datetime="2025-06-10">2025年6月10日</time> | OS: iOS 15.0+, Android 8.0+</p>
+                    <p>Version: <strong>1.9.5</strong> | Last Updated: <time datetime="2025-06-10">2025年6月10日</time> | OS: iOS 15.0+, Android 8.0+</p>
                 </div>
 
                 <div style="background: var(--card-background); border-radius: 16px; padding: 24px; margin-top: 32px; border: 1px solid var(--border-color);">
@@ -1140,9 +1375,9 @@
     </footer>
 
     <!-- 確認モーダル -->
-    <div id="confirmationModal" class="modal" aria-modal="true" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
+    <div id="confirmationModal" class="modal" style="display: none;" aria-modal="true" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
         <div class="modal-content">
-            <button class="close-button close" aria-label="閉じる">×</button>
+            <button class="close-button" aria-label="閉じる">&times;</button>
             <h2 id="modalTitle">送信完了</h2>
             <div id="modalDescription">
                 <p>お問い合わせありがとうございます。</p>
