@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Build with TY | AIアプリケーション作家 山崎鉄平のポートフォリオ</title>
-    <meta name="description"
-        content="アプリ作家 TY（山崎鉄平）によるAIアプリケーション作品集。ニタモノ、Lyric Weaver、aitango、AutoPoet、はじめのAI、MachoSoundsなど、AI技術と職人芸を融合させた革新的なアプリを紹介します。">
+    <meta name="description" content="AIによって個人の力がビッグテックに比肩する未来。アプリ作家 TY（山崎鉄平）による、最先端AI技術と職人の手触り感を融合させた次世代アプリケーション作品集。">
     <meta name="keywords"
         content="山崎鉄平, TY, アプリ作家, AIアプリ, MachoSounds, aitango, AutoPoet, はじめのAI, ニタモノ, Lyric Weaver, アプリ開発">
     <link rel="canonical" href="https://aitango.support/">
@@ -16,14 +15,14 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://aitango.support/">
     <meta property="og:title" content="Build with TY | AIアプリケーション作家 山崎鉄平">
-    <meta property="og:description" content="AI技術と手触り感を融合させた「アプリ作家」TYの作品集。日常を豊かにする6つの革新的アプリをご紹介。">
+    <meta property="og:description" content="AIで個人の可能性を解き放ち、ビッグテックとの境界を消す。アプリ作家 TYの、未来を見据えた革新的アプリケーション作品集。">
     <meta property="og:image" content="https://aitango.support/apsimage/og-image.jpg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://aitango.support/">
     <meta property="twitter:title" content="Build with TY | AIアプリケーション作家 山崎鉄平">
-    <meta property="twitter:description" content="AI技術と手触り感を融合させた「アプリ作家」TYの作品集。日常を豊かにする6つの革新的アプリをご紹介。">
+    <meta property="twitter:description" content="AIで個人の可能性を解き放ち、ビッグテックとの境界を消す。アプリ作家 TYの、未来を見据えた革新的アプリケーション作品集。">
     <meta property="twitter:image" content="https://aitango.support/apsimage/og-image.jpg">
 
     <!-- Structured Data (JSON-LD) -->
@@ -305,42 +304,93 @@
 
         .apps-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1px;
-            background-color: var(--border-white);
-            border: 1px solid var(--border-white);
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 24px;
+            /* Changed from 1px to spacing for individual cards */
         }
 
         .app-card {
-            background-color: var(--bg-black);
-            padding: 40px;
-            transition: background-color 0.4s ease;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-white);
+            padding: 48px;
+            border-radius: 24px;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
             display: flex;
             flex-direction: column;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
 
         .app-card:hover {
-            background-color: var(--bg-card);
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(135deg, #121212 0%, #0c0c0c 100%);
+        }
+
+        .app-icon-wrap {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            /* Squircle appearance */
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-white);
+            transition: all 0.5s ease;
+        }
+
+        .app-card:hover .app-icon-wrap {
+            transform: scale(1.1) rotate(5deg);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 20px rgba(42, 86, 255, 0.3);
         }
 
         .app-card img {
-            width: 64px;
-            height: 64px;
-            margin-bottom: 32px;
-            filter: grayscale(100%);
-            transition: filter 0.4s ease;
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            filter: grayscale(100%) brightness(0.8);
+            transition: all 0.5s ease;
         }
 
         .app-card:hover img {
-            filter: grayscale(0%);
+            filter: grayscale(0%) brightness(1);
+            transform: scale(1.1);
+        }
+
+        .app-tag {
+            position: absolute;
+            top: 48px;
+            right: 48px;
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            color: var(--accent-blue);
+            border: 1px solid var(--accent-blue);
+            padding: 4px 10px;
+            border-radius: 100px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            opacity: 0.6;
+        }
+
+        .app-card:hover .app-tag {
+            opacity: 1;
+            background: var(--accent-blue);
+            color: white;
         }
 
         .app-card h3 {
             font-family: var(--font-heading);
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
+            letter-spacing: -0.01em;
         }
 
         .app-card p {
@@ -348,7 +398,13 @@
             font-size: 0.95rem;
             margin-bottom: 32px;
             flex-grow: 1;
-            line-height: 1.7;
+            line-height: 1.8;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .app-card:hover p {
+            opacity: 1;
         }
 
         .download-links {
@@ -359,22 +415,24 @@
 
         .download-btn {
             font-family: var(--font-mono);
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
             color: var(--text-primary);
             text-decoration: none;
             border: 1px solid var(--border-white);
-            padding: 8px 16px;
-            border-radius: 100px;
+            padding: 10px 20px;
+            border-radius: 12px;
             transition: all 0.3s ease;
             flex: 1;
             text-align: center;
+            background: rgba(255, 255, 255, 0.02);
         }
 
         .download-btn:hover {
             border-color: var(--text-primary);
             background: var(--text-primary);
             color: var(--bg-black);
+            transform: scale(1.02);
         }
 
         /* About Section */
@@ -649,7 +707,7 @@
             <div class="container">
                 <h1 id="hero-title">Build with TY</h1>
                 <p class="lead">
-                    私が世に送り出すアプリは、単なる機能の集合体ではなく、一つひとつが私の想いを宿した「作品」です。デジタルの世界だからこそ、作り手の息づかいが感じられるような、そんなアプリを目指しています。</p>
+                    AIによって個人の力がビッグテックに比肩し、開発の境界が消えていく未来。私は「アプリ作家」として、最先端のAI技術と職人のような手触り感を融合させ、一人で世界を変えうる「作品」を創り出します。</p>
                 <div class="nav-links" style="justify-content: center; margin-top: 20px;">
                     <a href="#apps" class="nav-link" style="color: var(--text-primary); font-size: 0.9rem;">作品を見る</a>
                 </div>
@@ -662,7 +720,10 @@
             <div class="apps-grid">
                 <!-- ニタモノ -->
                 <div class="app-card" data-app="nitamono">
-                    <img src="apsimage/nitamono.png" alt="AI類似商品検索アプリ ニタモノ" loading="lazy">
+                    <span class="app-tag">AI Search</span>
+                    <div class="app-icon-wrap">
+                        <img src="apsimage/nitamono.png" alt="AI類似商品検索アプリ ニタモノ" loading="lazy">
+                    </div>
                     <h3>ニタモノ</h3>
                     <p>欲しい商品の「似たもの」をAIが発見する新しいショッピングサポートアプリ。写真から商品を特定し、400以上のブランドから類似アイテムを提案。予算に合わせた賢いショッピングを実現します。</p>
                     <div class="download-links">
@@ -674,7 +735,10 @@
                 </div>
                 <!-- Lyric Weaver -->
                 <div class="app-card" data-app="lyricweaver">
-                    <img src="apsimage/weaver.png" alt="AI歌詞生成アプリ Lyric Weaver" loading="lazy">
+                    <span class="app-tag">Creative AI</span>
+                    <div class="app-icon-wrap">
+                        <img src="apsimage/weaver.png" alt="AI歌詞生成アプリ Lyric Weaver" loading="lazy">
+                    </div>
                     <h3>Lyric Weaver</h3>
                     <p>あなたの想いを歌詞に変える革新的なAI創作ツール。テーマやキーワードを入力するだけで、プロレベルの歌詞があっという間に完成。音楽創作者から趣味の作詞家まで、誰でも簡単にオリジナル歌詞を作成できます。
                     </p>
@@ -687,7 +751,10 @@
                 </div>
                 <!-- aitango -->
                 <div class="app-card" data-app="aitango">
-                    <img src="apsimage/aitango.png" alt="AI学習フラッシュカードアプリ aitango" loading="lazy">
+                    <span class="app-tag">EdTech AI</span>
+                    <div class="app-icon-wrap">
+                        <img src="apsimage/aitango.png" alt="AI学習フラッシュカードアプリ aitango" loading="lazy">
+                    </div>
                     <h3>aitango</h3>
                     <p>AIを活用した革新的なフラッシュカード学習アプリ。長文や画像から自動でカード作成し、エビングハウスの忘却曲線に基づいた科学的復習システムで記憶定着を強力にサポートします。</p>
                     <div class="download-links">
@@ -699,7 +766,10 @@
                 </div>
                 <!-- AutoPoet -->
                 <div class="app-card" data-app="autopoet">
-                    <img src="apsimage/autopoet.png" alt="AI詩創作日記アプリ AutoPoet" loading="lazy">
+                    <span class="app-tag">Creative AI</span>
+                    <div class="app-icon-wrap">
+                        <img src="apsimage/autopoet.png" alt="AI詩創作日記アプリ AutoPoet" loading="lazy">
+                    </div>
                     <h3>AutoPoet</h3>
                     <p>日々の思い出をAIが美しい詩や感動的な物語に変換する革新的な日記アプリ。気分を絵文字で表現し、日記の内容にぴったりの曲をAIが自動選曲してYouTube動画を貼り付けます。</p>
                     <div class="download-links">
@@ -711,7 +781,10 @@
                 </div>
                 <!-- はじめのAI -->
                 <div class="app-card" data-app="hajime">
-                    <img src="apsimage/hajime.png" alt="AI初心者向けアシスタント はじめのAI" loading="lazy">
+                    <span class="app-tag">AI Assistant</span>
+                    <div class="app-icon-wrap">
+                        <img src="apsimage/hajime.png" alt="AI初心者向けアシスタント はじめのAI" loading="lazy">
+                    </div>
                     <h3>はじめのAI</h3>
                     <p>AI初心者でも簡単にAIの便利さを体験できるアプリ。「おまかせプロンプト」で複雑な指示は不要。広告なし・買い切り型でストレスフリーなAI体験を提供します。</p>
                     <div class="download-links">
@@ -723,7 +796,10 @@
                 </div>
                 <!-- MachoSounds -->
                 <div class="app-card" data-app="machosounds">
-                    <img src="apsimage/machosounds.png" alt="ボディビル応援＆タイマーアプリ MachoSounds" loading="lazy">
+                    <span class="app-tag">Fitness</span>
+                    <div class="app-icon-wrap">
+                        <img src="apsimage/machosounds.png" alt="ボディビル応援＆タイマーアプリ MachoSounds" loading="lazy">
+                    </div>
                     <h3>MachoSounds</h3>
                     <p>自宅トレーニングのモチベーション向上をサポート。「ナイスバルク！」などの熱い応援コールとタバタタイマーを搭載し、トレーニング効率を最大化します。</p>
                     <div class="download-links">
@@ -741,15 +817,17 @@
             <h2 class="section-title">TYについて</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>私が「アプリ開発者」ではなく、あえて『<strong>アプリ作家</strong>』と名乗るのには、特別な想いを込めているからです。</p>
-                    <p>それは、私のアプリ作りが、効率や分業化を重視する大規模な開発とは一線を画し、むしろ小さな工房で生まれるハンドクラフト作品に近いと考えているからです。</p>
-                    <p>例えば、木工職人が一本の木と向き合い、使う人の暮らしを想い椅子を削り出すように。陶芸家が、一塊の土に触れ、使い手の食卓を想像しながら、心を込めて器を形作るように。</p>
+                    <p>私が「アプリ開発者」ではなく、あえて『<strong>アプリ作家</strong>』と名乗る背景には、AIが個人の可能性を無限に拡張する未来への確信があります。</p>
+                    <p>これまで大規模な組織やビッグテックにしか成し得なかった高度な開発。しかし、AIという強力な伴走者を得た今、一人の個人がその全工程を掌握し、かつてないスピードとクオリティで具現化できる時代が到来しています。
+                    </p>
+                    <p>組織の壁は消え、個人の感性がそのまま世界のスタンダードになる。そんな未来は、もうすぐそこまで来ています。</p>
                 </div>
                 <div class="about-text">
-                    <p>私もまた、日常に転がる「あったらいいな」というアイデアの原石を、構想からデザイン、そして一行一行のコードに至るまで、すべて自分の手で、一貫した哲学のもとに作り上げています。</p>
-                    <p>そのため、私が世に送り出すアプリは、単なる機能の集合体ではなく、一つひとつが私の想いを宿した<strong>「作品」</strong>です。ボタンの配置や色の選び方、操作した時の心地よい感触など、細部にまで「手触り感」や「温もり」を追求しています。
+                    <p>私はAIを単なる道具ではなく、自身の「思考の拡張」として使いこなすことで、ビッグテック並みの開発力と、職人が一点物を作るような繊細な「手触り感」を両立させています。</p>
+                    <p>構想からデザイン、そして一行のコードに至るまで、未来を見据えた一貫した哲学を宿した私のアプリは、単なる機能の集合体ではなく、作り手の魂が通った<strong>「次世代の作品」</strong>です。
                     </p>
-                    <p style="font-style: italic; color: var(--text-primary);">作り手の顔が見える、温かみのある作品を届けたい。</p>
+                    <p style="font-style: italic; color: var(--text-primary);">個の力が世界を塗り替える。テクノロジーと温もりが交差する未来を、私は創り続けます。
+                    </p>
                 </div>
             </div>
         </section>
@@ -875,7 +953,7 @@
     <footer>
         <div class="container">
             <div class="footer-logo">TY</div>
-            <p class="footer-text">AI技術を活用して、皆様の日常をより豊かで便利にするアプリケーションを開発しています。ご質問やフィードバックがございましたら、お気軽にお声かけください。</p>
+            <p class="footer-text">AIによって個人の力が無限に広がる未来を目指して。一人の「アプリ作家」として、ビッグテックに比肩する開発力と手触り感を融合させた次世代の作品を創り続けます。</p>
             <p class="copyright">&copy; 2024 Teppei Yamazaki. All rights reserved.</p>
         </div>
     </footer>
