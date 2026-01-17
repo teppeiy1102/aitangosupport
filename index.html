@@ -187,10 +187,10 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 160px 0 80px;
+            justify-content: flex-end;
+            align-items: flex-start;
+            text-align: left;
+            padding: 120px 0;
             position: relative;
             z-index: 2;
         }
@@ -209,47 +209,44 @@
 
         .hero-background-text {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            top: 15%;
+            left: 55%;
+            transform: translate(0, 0) rotate(-2deg);
             font-family: var(--font-heading);
             font-weight: 900;
-            font-size: 25vw;
-            color: rgba(255, 255, 255, 0.1);
+            font-size: 20vw;
+            color: rgba(255, 255, 255, 0.03);
             z-index: -2;
             pointer-events: none;
             user-select: none;
             line-height: 0.8;
             letter-spacing: -0.05em;
-            text-align: center;
-            width: 150%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            text-align: left;
+            white-space: nowrap;
         }
 
         .hero-visual {
-            position: relative;
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
+            height: 100%;
             z-index: 1;
-            padding: 80px 0;
-            display: flex;
-            justify-content: center;
+            pointer-events: none;
         }
 
         .hero-slider {
             position: relative;
             width: 100%;
-            max-width: 800px;
-            aspect-ratio: 1 / 1;
+            height: 100%;
             overflow: hidden;
-            background: #050505;
+            background: #18007042;
         }
 
         .hero-track {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-auto-rows: 250px;
             width: 100%;
             height: 100%;
         }
@@ -261,7 +258,7 @@
             background-position: center;
             opacity: 0.4;
             filter: grayscale(80%) brightness(0.6);
-            transition: opacity 1s ease, filter 1s ease;
+            transition: opacity 0.5s ease, filter 0.5s ease;
             position: relative;
             overflow: hidden;
         }
@@ -288,20 +285,24 @@
 
         .hero h1 {
             font-family: "Futura-Bold", "Century Gothic", "CenturyGothic", "AppleGothic", sans-serif;
-            font-size: clamp(3rem, 10vw, 14rem);
+            font-size: clamp(4rem, 15vw, 18rem);
             font-weight: 900;
-            letter-spacing: 0.01em;
-            line-height: 0.9;
-            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+            line-height: 0.85;
+            margin-bottom: 40px;
             text-transform: uppercase;
+            position: relative;
+            left: -0.03em;
         }
 
         .hero p.lead {
-            font-size: clamp(1rem, 2vw, 1.1rem);
+            font-size: clamp(1rem, 1.5vw, 1.25rem);
             color: var(--text-secondary);
-            max-width: 700px;
-            margin: 0 auto 40px;
-            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 0 60px 0;
+            line-height: 1.6;
+            align-self: flex-end;
+            text-align: right;
         }
 
         /* Glow Effect */
@@ -350,6 +351,35 @@
             overflow: hidden;
         }
 
+        .app-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: var(--app-icon);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.1;
+            filter: grayscale(0%) blur(20px);
+            z-index: 0;
+            pointer-events: none;
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .app-card:hover::after {
+            opacity: 0.2;
+            transform: scale(1.1);
+            filter: grayscale(0%) blur(2px);
+        }
+
+        .app-card>* {
+            position: relative;
+            z-index: 1;
+        }
+
         .app-card:hover {
             transform: translateY(-8px);
             border-color: rgba(255, 255, 255, 0.2);
@@ -357,61 +387,6 @@
             background: linear-gradient(135deg, #121212 0%, #0c0c0c 100%);
         }
 
-        .app-icon-wrap {
-            position: relative;
-            width: 80px;
-            height: 80px;
-            margin-bottom: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 20px;
-            /* Squircle appearance */
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-white);
-            transition: all 0.5s ease;
-        }
-
-        .app-card:hover .app-icon-wrap {
-            transform: scale(1.1) rotate(5deg);
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 20px rgba(42, 86, 255, 0.3);
-        }
-
-        .app-card img {
-            width: 50px;
-            height: 50px;
-            object-fit: contain;
-            filter: grayscale(100%) brightness(0.8);
-            transition: all 0.5s ease;
-        }
-
-        .app-card:hover img {
-            filter: grayscale(0%) brightness(1);
-            transform: scale(1.1);
-        }
-
-        .app-tag {
-            position: absolute;
-            top: 48px;
-            right: 48px;
-            font-family: var(--font-mono);
-            font-size: 0.6rem;
-            color: var(--accent-blue);
-            border: 1px solid var(--accent-blue);
-            padding: 4px 10px;
-            border-radius: 100px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            opacity: 0.6;
-        }
-
-        .app-card:hover .app-tag {
-            opacity: 1;
-            background: var(--accent-blue);
-            color: white;
-        }
 
         .app-card h3 {
             font-family: var(--font-heading);
@@ -669,6 +644,29 @@
             overflow-y: auto;
             border: 1px solid var(--border-white);
             position: relative;
+            overflow-x: hidden;
+        }
+
+        .modal-bg-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%;
+            height: 120%;
+            background-image: var(--modal-app-icon);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.04;
+            filter: grayscale(100%) blur(5px);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .modal-body-content {
+            position: relative;
+            z-index: 1;
         }
 
         .modal-close {
@@ -700,7 +698,27 @@
             }
 
             .hero h1 {
-                font-size: 4rem;
+                font-size: clamp(3rem, 12vw, 5rem);
+                text-align: left;
+                margin-left: 0;
+            }
+
+            .hero p.lead {
+                text-align: left;
+                align-self: flex-start;
+                margin-bottom: 40px;
+            }
+
+            .hero-content {
+                justify-content: center;
+                padding: 150px 0 80px;
+            }
+
+            .hero-background-text {
+                font-size: 40vw;
+                top: 10%;
+                left: -10%;
+                opacity: 0.02;
             }
         }
     </style>
@@ -733,7 +751,7 @@
                     <p class="lead">
                         AIによって個人の力がビッグテックに比肩し、開発の境界が消えていく未来。私は「アプリ作家」として、最先端のAI技術と職人のような手触り感を融合させ、一人で世界を変えうる「作品」を創り出します。
                     </p>
-                    <div class="nav-links" style="justify-content: center; margin-top: 20px;">
+                    <div class="nav-links" style="margin-top: 20px;">
                         <a href="#apps" class="nav-link"
                             style="color: var(--text-primary); font-size: 0.9rem;">作品を見る</a>
                     </div>
@@ -753,11 +771,8 @@
             <h2 class="section-title">Apps</h2>
             <div class="apps-grid">
                 <!-- ニタモノ -->
-                <div class="app-card" data-app="nitamono">
-                    <span class="app-tag">AI Search</span>
-                    <div class="app-icon-wrap">
-                        <img src="apsimage/nitamono.png" alt="AI類似商品検索アプリ ニタモノ" loading="lazy">
-                    </div>
+                <div class="app-card" data-app="nitamono" style="--app-icon: url('apsimage/nitamono.png')">
+
                     <h3>ニタモノ</h3>
                     <p>欲しい商品の「似たもの」をAIが発見する新しいショッピングサポートアプリ。写真から商品を特定し、400以上のブランドから類似アイテムを提案。予算に合わせた賢いショッピングを実現します。</p>
                     <div class="download-links">
@@ -768,11 +783,8 @@
                     </div>
                 </div>
                 <!-- Lyric Weaver -->
-                <div class="app-card" data-app="lyricweaver">
-                    <span class="app-tag">Creative AI</span>
-                    <div class="app-icon-wrap">
-                        <img src="apsimage/weaver.png" alt="AI歌詞生成アプリ Lyric Weaver" loading="lazy">
-                    </div>
+                <div class="app-card" data-app="lyricweaver" style="--app-icon: url('apsimage/weaver.png')">
+
                     <h3>Lyric Weaver</h3>
                     <p>あなたの想いを歌詞に変える革新的なAI創作ツール。テーマやキーワードを入力するだけで、プロレベルの歌詞があっという間に完成。音楽創作者から趣味の作詞家まで、誰でも簡単にオリジナル歌詞を作成できます。
                     </p>
@@ -784,11 +796,8 @@
                     </div>
                 </div>
                 <!-- aitango -->
-                <div class="app-card" data-app="aitango">
-                    <span class="app-tag">EdTech AI</span>
-                    <div class="app-icon-wrap">
-                        <img src="apsimage/aitango.png" alt="AI学習フラッシュカードアプリ aitango" loading="lazy">
-                    </div>
+                <div class="app-card" data-app="aitango" style="--app-icon: url('apsimage/aitango.png')">
+
                     <h3>aitango</h3>
                     <p>AIを活用した革新的なフラッシュカード学習アプリ。長文や画像から自動でカード作成し、エビングハウスの忘却曲線に基づいた科学的復習システムで記憶定着を強力にサポートします。</p>
                     <div class="download-links">
@@ -799,11 +808,8 @@
                     </div>
                 </div>
                 <!-- AutoPoet -->
-                <div class="app-card" data-app="autopoet">
-                    <span class="app-tag">Creative AI</span>
-                    <div class="app-icon-wrap">
-                        <img src="apsimage/autopoet.png" alt="AI詩創作日記アプリ AutoPoet" loading="lazy">
-                    </div>
+                <div class="app-card" data-app="autopoet" style="--app-icon: url('apsimage/autopoet.png')">
+
                     <h3>AutoPoet</h3>
                     <p>日々の思い出をAIが美しい詩や感動的な物語に変換する革新的な日記アプリ。気分を絵文字で表現し、日記の内容にぴったりの曲をAIが自動選曲してYouTube動画を貼り付けます。</p>
                     <div class="download-links">
@@ -814,11 +820,8 @@
                     </div>
                 </div>
                 <!-- はじめのAI -->
-                <div class="app-card" data-app="hajime">
-                    <span class="app-tag">AI Assistant</span>
-                    <div class="app-icon-wrap">
-                        <img src="apsimage/hajime.png" alt="AI初心者向けアシスタント はじめのAI" loading="lazy">
-                    </div>
+                <div class="app-card" data-app="hajime" style="--app-icon: url('apsimage/hajime.png')">
+
                     <h3>はじめのAI</h3>
                     <p>AI初心者でも簡単にAIの便利さを体験できるアプリ。「おまかせプロンプト」で複雑な指示は不要。広告なし・買い切り型でストレスフリーなAI体験を提供します。</p>
                     <div class="download-links">
@@ -829,11 +832,8 @@
                     </div>
                 </div>
                 <!-- MachoSounds -->
-                <div class="app-card" data-app="machosounds">
-                    <span class="app-tag">Fitness</span>
-                    <div class="app-icon-wrap">
-                        <img src="apsimage/machosounds.png" alt="ボディビル応援＆タイマーアプリ MachoSounds" loading="lazy">
-                    </div>
+                <div class="app-card" data-app="machosounds" style="--app-icon: url('apsimage/machosounds.png')">
+
                     <h3>MachoSounds</h3>
                     <p>自宅トレーニングのモチベーション向上をサポート。「ナイスバルク！」などの熱い応援コールとタバタタイマーを搭載し、トレーニング効率を最大化します。</p>
                     <div class="download-links">
@@ -1033,26 +1033,32 @@
             const appData = {
                 machosounds: {
                     title: 'MachoSounds',
+                    icon: 'apsimage/machosounds.png',
                     description: `「MachoSounds」は、あなたの筋力トレーニングを次のレベルへと引き上げる、革新的なボディビル掛け声＆タイマーアプリです。自宅でのトレーニング中に孤独やモチベーションの低下を感じたことはありませんか？このアプリがあれば、まるで屈強なトレーナーが隣で応援してくれているかのような、熱いサポートを体験できます。`
                 },
                 aitango: {
                     title: 'aitango',
+                    icon: 'apsimage/aitango.png',
                     description: `「aitango」は、AIの力を最大限に活用し、あなたの語学学習を根底から変える革新的なフラッシュカードアプリです。単語帳の作成、学習、復習、共有、管理といった、学習のあらゆるプロセスをこの一つで完結させることができます。`
                 },
                 autopoet: {
                     title: 'AutoPoet',
+                    icon: 'apsimage/autopoet.png',
                     description: `「AutoPoet」は、あなたの日々を詩に変える、魔法のようなAI日記アプリです。何気ない日常の出来事、心に浮かんだ感情、大切な思い出を書き留めるだけで、AIがそれを感動的な詩や物語へと昇華させます。`
                 },
                 hajime: {
                     title: 'はじめのAI',
+                    icon: 'apsimage/hajime.png',
                     description: `「はじめのAI」は、AIの専門知識がなくても、誰でもその驚くべきパワーを体感できる、初心者向けに特化した画期的なアシスタントアプリです。「AIは難しそう」というイメージを覆し、あなたの日常を、もっと賢く、もっと便利に変えるお手伝いをします。`
                 },
                 nitamono: {
                     title: 'ニタモノ',
+                    icon: 'apsimage/nitamono.png',
                     description: `「ニタモノ」は、あなたの「欲しい」を、もっと賢く、もっと自由に叶えるための、AIショッピングサポートアプリです。気になる商品の写真やスクリーンショットを撮り、アプリで囲むだけ。AIが画像の色、形、デザインを瞬時に解析し、400以上のブランドからそっくりなアイテムを提案します。`
                 },
                 lyricweaver: {
                     title: 'Lyric Weaver',
+                    icon: 'apsimage/weaver.png',
                     description: `「Lyric Weaver」は、あなたの内に秘めた想いを、美しい歌詞へと紡ぎ出す、革新的なAI作詞パートナーです。音楽の知識や作詞の経験がなくても、プロの作詞家のように、心に響くオリジナル歌詞を瞬時に創り出すことができます。`
                 }
             };
@@ -1069,9 +1075,13 @@
                     const app = card.dataset.app;
                     const data = appData[app];
                     if (data) {
+                        modal.querySelector('.modal-content').style.setProperty('--modal-app-icon', `url('${data.icon}')`);
                         modalBody.innerHTML = `
-                            <h2 class="section-title" style="font-size: 2.5rem; margin-bottom: 24px;">${data.title}</h2>
-                            <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.8;">${data.description}</p>
+                            <div class="modal-bg-icon"></div>
+                            <div class="modal-body-content">
+                                <h2 class="section-title" style="font-size: 2.5rem; margin-bottom: 24px;">${data.title}</h2>
+                                <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.8;">${data.description}</p>
+                            </div>
                         `;
                         modal.style.display = 'flex';
                     }
@@ -1093,24 +1103,39 @@
                 return array;
             }
 
-            const shuffledImages = shuffle([...images]);
+            let shuffledImages = shuffle([...images]);
             let currentImageIndex = 0;
 
-            // Generate 4 slots for the grid
-            for (let i = 0; i < 4; i++) {
-                const slide = document.createElement('div');
-                slide.className = 'hero-slide';
-                slide.style.backgroundImage = `url('${shuffledImages[currentImageIndex++]}')`;
-                track.appendChild(slide);
+            function initGrid() {
+                if (!track) return;
+                track.innerHTML = '';
+
+                // Calculate number of cells needed
+                const cellWidth = 250;
+                const cellHeight = 250;
+                const cols = Math.ceil(window.innerWidth / cellWidth);
+                const rows = Math.ceil(window.innerHeight / cellHeight);
+                const totalCells = cols * rows;
+
+                for (let i = 0; i < totalCells; i++) {
+                    const slide = document.createElement('div');
+                    slide.className = 'hero-slide';
+                    if (currentImageIndex >= shuffledImages.length) {
+                        shuffle(shuffledImages);
+                        currentImageIndex = 0;
+                    }
+                    slide.style.backgroundImage = `url('${shuffledImages[currentImageIndex++]}')`;
+                    track.appendChild(slide);
+                }
             }
 
-            const currentSlides = document.querySelectorAll('.hero-slide');
-
             function updateGridImage() {
-                const randomIndex = Math.floor(Math.random() * 4);
-                const slide = currentSlides[randomIndex];
+                const slides = document.querySelectorAll('.hero-slide');
+                if (slides.length === 0) return;
 
-                // Transition effect: Fade out, change image, fade in
+                const randomIndex = Math.floor(Math.random() * slides.length);
+                const slide = slides[randomIndex];
+
                 slide.style.opacity = 0;
 
                 setTimeout(() => {
@@ -1119,15 +1144,17 @@
                         currentImageIndex = 0;
                     }
                     slide.style.backgroundImage = `url('${shuffledImages[currentImageIndex++]}')`;
-                    // Reset opacity to match CSS values
                     slide.style.opacity = window.innerWidth <= 600 ? 0.35 : 0.4;
-                }, 1000);
+                }, 500);
             }
 
-            // Update a random grid cell every 5 seconds
-            if (currentSlides.length > 0) {
-                setInterval(updateGridImage, 5000);
-            }
+            initGrid();
+            window.addEventListener('resize', () => {
+                // Debounce simple resize initialization
+                clearTimeout(window.resizeTimer);
+                window.resizeTimer = setTimeout(initGrid, 250);
+            });
+            setInterval(updateGridImage, 800);
 
             // Contact Form
             const contactForm = document.getElementById('contactForm');
