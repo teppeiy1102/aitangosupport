@@ -99,6 +99,64 @@
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Blobs */
+        .bg-blobs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.32;
+            background: radial-gradient(circle, var(--accent-blue) 0%, transparent 70%);
+            animation: pulse 15s infinite alternate;
+        }
+
+        .blob-1 {
+            width: 500px;
+            height: 500px;
+            top: -200px;
+            right: -200px;
+            background: radial-gradient(circle, #b71a22 0%, transparent 70%);
+        }
+
+        .blob-2 {
+            width: 600px;
+            height: 600px;
+            bottom: 10%;
+            left: -150px;
+            background: radial-gradient(circle, #ff662a 0%, transparent 50%);
+            animation-delay: -5s;
+        }
+
+        .blob-3 {
+            width: 800px;
+            height: 800px;
+            top: 40%;
+            right: 5%;
+            background: radial-gradient(circle, #4663e5 0%, transparent 70%);
+            animation-delay: -10s;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1) translate(0, 0);
+            }
+
+            100% {
+                transform: scale(1.1) translate(20px, 20px);
+            }
         }
 
         .container {
@@ -222,7 +280,6 @@
             line-height: 0.8;
             letter-spacing: -0.05em;
             text-align: left;
-            white-space: nowrap;
         }
 
         .hero-visual {
@@ -245,8 +302,9 @@
 
         .hero-track {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            grid-auto-rows: 250px;
+            grid-template-rows: repeat(3, 1fr);
+            grid-auto-flow: column;
+            grid-auto-columns: minmax(auto, 33.33vh);
             width: 100%;
             height: 100%;
         }
@@ -277,20 +335,15 @@
             .hero-slide {
                 opacity: 0.35;
             }
-
-            .hero-slider {
-                max-width: 90%;
-            }
         }
 
         .hero h1 {
-            font-family: "Futura-Bold", "Century Gothic", "CenturyGothic", "AppleGothic", sans-serif;
+            font-family: var(--font-heading);
             font-size: clamp(4rem, 15vw, 18rem);
             font-weight: 900;
             letter-spacing: -0.02em;
             line-height: 0.85;
             margin-bottom: 40px;
-            text-transform: uppercase;
             position: relative;
             left: -0.03em;
         }
@@ -698,7 +751,9 @@
             }
 
             .hero h1 {
-                font-size: clamp(3rem, 12vw, 5rem);
+                font-size: clamp(4.5rem, 22vw, 8.5rem);
+                line-height: 0.8;
+                letter-spacing: -0.04em;
                 text-align: left;
                 margin-left: 0;
             }
@@ -715,16 +770,22 @@
             }
 
             .hero-background-text {
-                font-size: 40vw;
-                top: 10%;
-                left: -10%;
-                opacity: 0.02;
+                font-size: 50vw;
+                top: 5%;
+                left: -5%;
+                opacity: 0.015;
+                line-height: 0.7;
             }
         }
     </style>
 </head>
 
 <body>
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
 
     <header>
         <nav>
@@ -745,9 +806,9 @@
         <section class="hero">
             <div class="hero-content">
                 <div class="hero-text-bg"></div>
-                <div class="hero-background-text">BUILD WITH TY</div>
+                <div class="hero-background-text">BUILD<br>WITH TY</div>
                 <div class="container">
-                    <h1 id="hero-title">Build with TY</h1>
+                    <h1 id="hero-title">Build<br>with TY</h1>
                     <p class="lead">
                         AIによって個人の力がビッグテックに比肩し、開発の境界が消えていく未来。私は「アプリ作家」として、最先端のAI技術と職人のような手触り感を融合させ、一人で世界を変えうる「作品」を創り出します。
                     </p>
@@ -1111,10 +1172,10 @@
                 track.innerHTML = '';
 
                 // Calculate number of cells needed
-                const cellWidth = 250;
-                const cellHeight = 250;
+                const rows = 3;
+                const cellHeight = window.innerHeight / rows;
+                const cellWidth = cellHeight; // Maintain square-ish proportion
                 const cols = Math.ceil(window.innerWidth / cellWidth);
-                const rows = Math.ceil(window.innerHeight / cellHeight);
                 const totalCells = cols * rows;
 
                 for (let i = 0; i < totalCells; i++) {
